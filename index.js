@@ -1,39 +1,45 @@
-const collection = document.getElementsByClassName("paragraph");
+const CURRENCY = {
+  USD_TO_UAH: 37.65,
+  EUR_TO_UAH: 40.61,
+};
 
-// for (let i = 0; i < collection.length; i++) {
-//   collection[i].style.color = "green";
-// }
+const converterForm = document.querySelector("#currency-converter-form");
 
-for (let p of collection) {
-  p.style.color = "green";
+converterForm.addEventListener("submit", convertHandler);
+
+function convertHandler(event) {
+  event.preventDefault();
+
+  const amount = Number(document.querySelector("#amount").value);
+  const currency = document.querySelector("#currency").value;
+
+  let convertedAmount;
+
+  const { USD_TO_UAH: usdCourse, EUR_TO_UAH: eurCourse } = CURRENCY;
+
+  switch (currency) {
+    case "USD": {
+      convertedAmount = amount * usdCourse;
+      break;
+    }
+    case "EUR": {
+      convertedAmount = amount * eurCourse;
+      break;
+    }
+    default:
+      throw new Error("Congratulations you broke it");
+  }
+
+  // if (currency === "USD") {
+  //   convertedAmount = amount * usdCourse;
+  // } else if (currency === "EUR") {
+  //   convertedAmount = amount * eurCourse;
+  // } else {
+  //   throw new Error("Congratulations you broke it");
+  // }
+
+  const resultDiv = document.querySelector("#result");
+  resultDiv.innerHTML = `${amount} ${currency} = ${convertedAmount.toFixed(
+    2
+  )} UAH`;
 }
-
-const btns = document.getElementsByTagName("button");
-const arr = [...btns];
-//console.log(arr);
-
-arr.forEach((button) => {
-  button.style.color = "red";
-});
-
-function hello(event) {
-  console.log("Hello user!");
-
-  event.target.removeEventListener("click", hello);
-}
-
-for (let btn of btns) {
-  btn.addEventListener("click", hello);
-}
-
-const btn = document.querySelector("button");
-// console.log(btn);
-
-const btn2 = document.querySelector(".super-btn");
-console.log(btn2);
-
-const btn3 = document.querySelector("#btn-btn");
-console.log(btn3);
-
-const btnCollection = document.querySelectorAll("button");
-console.log(btnCollection);
