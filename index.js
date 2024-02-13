@@ -20,3 +20,11 @@ function clickHandler({
 
   parentNode.style.backgroundColor = color;
 }
+
+function createElement() {
+  const p = document.createElement("p");
+  p.classList.add("backcolor");
+  p.append("Nice color");
+  document.body.append(p);
+}
+createElement();
