@@ -4,27 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <script src="./index.js" defer></script>
+    <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <h1>Конвертер валют</h1>
-    <form id="currency-converter-form">
-      <label>
-        Сумма конвертации:
-        <input type="number" id="amount" min="1" required />
-      </label>
-
-      <label>
-        Выберите валюту:
-        <select id="currency" required>
-          <option value="USD">USD</option>
-          <option value="EUR">EUR</option>
-        </select>
-      </label>
-
-      <button type="submit">Конвертировать</button>
-
-      <div id="result"></div>
-    </form>
-    <script src="index.js"></script>
+    <div id="root">
+      <button data-color="red">Red</button>
+      <button data-color="green">Green</button>
+      <button data-color="blue">Blue</button>
+      <button data-color="black">Black</button>
+      <button data-color="orange">Orange</button>
+    </div>
   </body>
 </html>
