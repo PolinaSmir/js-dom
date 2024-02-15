@@ -1,30 +1,25 @@
-const button = document.querySelectorAll("button");
-const div = document.querySelector("#root");
+const field = document.querySelector("#game-field");
+const box = document.querySelector("#box");
 
-console.dir(button);
+field.addEventListener("click", clickHandler /*, { capture: true }*/);
 
-for (let btn of button) {
-  btn.addEventListener("click", clickHandler);
+function clickHandler(event) {
+  if (event.currentTarget === event.target) {
+    const {
+      target: {
+        children: { box },
+      },
+      clientX,
+      clientY,
+    } = event;
+
+    box.style.top = `${clientY - box.offsetHeight / 2}px`;
+    box.style.left = `${clientX - box.offsetWidth / 2}px`;
+  } /* if сам по себе фиксит проблему с нажатием на квадрат */
+  // if (box.style.left >= "459px") {
+  //   box.style.left = `458px`;
+  // }
+  // if (box.style.left <= "8") {
+  //   box.style.left = `8px`;
+  // }
 }
-
-function clickHandler({
-  target: {
-    dataset: { color },
-    parentNode,
-  },
-}) {
-  // const {
-  //   dataset: { color },
-  // } = target;
-  // const { parentNode } = target;
-
-  parentNode.style.backgroundColor = color;
-}
-
-function createElement() {
-  const p = document.createElement("p");
-  p.classList.add("backcolor");
-  p.append("Nice color");
-  document.body.append(p);
-}
-createElement();
