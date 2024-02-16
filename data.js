@@ -11,7 +11,7 @@ const data = [
     name: "Josh",
     description: "Description for Josh",
     profilePicture:
-      "https://pm1.aminoapps.com/6750/dddd7fbf857879e7a4513d20a85c1c89d5d74a41v2_hq.jpg",
+      "TESThttps://pm1.aminoapps.com/6750/dddd7fbf857879e7a4513d20a85c1c89d5d74a41v2_hq.jpg",
   },
   {
     id: 3,
