@@ -1,77 +1,87 @@
-const root = document.querySelector("#root");
+/* <article>
+  <div>
+    <img
+      src="https://randomuser.me/api/portraits/men/77.jpg"
+      alt="User's avatar"
+    />
+  </div>
+  <p>
+    Им'я, фамiлiя: <span id="name-surname">John</span>
+  </p>
+  <p>
+    Email: <span id="email">a@mail.com</span>
+  </p>
+  <p>
+    Адреса: <span id="adress">adress</span>
+  </p>
+  <p>
+    День народження: <span id="birthday">01.01.2000</span>
+  </p>
+</article>; */
+const URL = "https://randomuser.me/api";
+const btn = document.querySelector(".btn-load-usr");
+const section = document.querySelector("section");
 
-function createUserCard(user) {
-  // 1. Create wrapper
-  const imgWrapper = createImageWrapper(user);
+btn.addEventListener("click", buttonClick);
 
-  // 2. Створення h2
-  const h2 = createElement("h2", { classNames: ["username"] }, user.name);
-
-  // 3. Створення p
-  const p = createElement(
-    "p",
-    { classNames: ["description"] },
-    user.description
-  );
-
-  // 4. Створюємо і повертаємо article, в який вкладені створені img, h2, p
-  return createElement(
-    "article",
-    { classNames: ["card-wrapper"] },
-    imgWrapper,
-    h2,
-    p
-  );
+function buttonClick() {
+  getData(URL);
 }
 
-const cardArray = data.map((user) => createUserCard(user));
+async function getData(url) {
+  const u = fetch(url);
+  const response = await u;
+  const data = await response.json();
 
-root.append(...cardArray);
-
-/**
- * @param {String} type - тег елемента, який нам треба створити
- * @param {String[]} classNames - список класів, які треба додати до елемента
- * @param {...Node} childNodes - список дочірніх вузлів
- * @returns {HTMLElement}
- */
-function createElement(type, { classNames }, ...childNodes) {
-  const elem = document.createElement(type);
-  elem.classList.add(...classNames);
-  elem.append(...childNodes);
-
-  return elem;
+  displayCard(data);
 }
 
-function imageLoadHandler({ target }) {
-  console.log("image successfully loaded");
-  const parentWrapper = document.getElementById(`wrapper${target.dataset.id}`);
-  parentWrapper.append(target);
-}
+function displayCard(userData) {
+  const arrayData = userData.results[0];
+  const {
+    picture: { large },
+    email,
+    name: { first, last },
+    location: {
+      street: { number, name },
+    },
+    dob: { date },
+  } = arrayData;
 
-function imageErrorHandler({ target }) {
-  target.remove();
-  console.log("image loading error");
-}
+  const birthdayDate = new Date(date);
+  day = birthdayDate.getDate();
+  month = birthdayDate.getMonth();
+  year = birthdayDate.getFullYear();
 
-function createUserImage(user) {
-  const img = document.createElement("img");
-  img.setAttribute("src", user.profilePicture);
-  img.setAttribute("alt", user.name);
-  img.dataset.id = user.id;
-  img.classList.add("card-image");
+  const article = document.querySelector("#card");
+  article.classList.add("card-display");
 
-  img.addEventListener("load", imageLoadHandler);
-  img.addEventListener("error", imageErrorHandler);
+  const nameSurname = document.querySelector("#name-surname");
+  nameSurname.textContent = `${first} ${last}`;
 
-  return img;
-}
+  const userEmail = document.querySelector("#email");
+  userEmail.textContent = email;
 
-function createImageWrapper(user) {
-  // Create zahluska
-  const imgWrapper = createElement("div", { classNames: ["image-wrapper"] });
-  imgWrapper.setAttribute("id", `wrapper${user.id}`);
+  const userAdress = document.querySelector("#adress");
+  userAdress.textContent = `${number} ${name}`;
 
-  const img = createUserImage(user);
+  const userBirthday = document.querySelector("#birthday");
+  userBirthday.textContent = `${day}/${month}/${year}`;
 
-  return imgWrapper;
+  const div = document.querySelector("div");
+  const img = document.querySelector("img");
+  img.setAttribute("src", large);
+  //div.append(img);
+
+  //const article = document.createElement("article");
+  // const pName = document.createElement("p");
+  // pName.append(`Им'я, фамiлiя: ${first} ${last}`);
+  // const pEmail = document.createElement("p");
+  // pEmail.append(`Email: ${email}`);
+  // const pAdress = document.createElement("p");
+  // pAdress.append(`Адреса: ${number} ${name}`);
+  // const pBirthday = document.createElement("p");
+  // pBirthday.append(`День народження: ${day}/${month + 1}/${year}`);
+  // article.append(div, pName, pEmail, pAdress, pBirthday);
+  // section.append(article);
 }

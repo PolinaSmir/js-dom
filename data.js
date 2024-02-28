@@ -46,13 +46,13 @@ const data = [
     name: "Tracy",
     description: "Description for Tracy",
     profilePicture:
-      "https://pm1.aminoapps.com/6750/dddd7fbf857879e7a4513d20a85c1c89d5d74a41v2_hq.jpg",
+      "TASThttps://pm1.aminoapps.com/6750/dddd7fbf857879e7a4513d20a85c1c89d5d74a41v2_hq.jpg",
   },
   {
     id: 8,
     name: "James",
     description: "Description for James",
     profilePicture:
-      "https://pm1.aminoapps.com/6750/dddd7fbf857879e7a4513d20a85c1c89d5d74a41v2_hq.jpg",
+      "TESThttps://pm1.aminoapps.com/6750/dddd7fbf857879e7a4513d20a85c1c89d5d74a41v2_hq.jpg",
   },
 ];
